@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ink — near-black with a warm undertone */
+    --ink: 24 10% 7%;
+    --ink-2: 24 8% 10%;
+    --ink-3: 24 7% 14%;
+    /* Bone — warm off-white */
+    --bone: 40 23% 94%;
+    --bone-dim: 38 12% 72%;
+    --bone-mute: 36 8% 52%;
+    /* Pacific blue — signal accent (token name kept as --ember to avoid wide refactors) */
+    --ember: 216 100% 66%;
+    --ember-deep: 216 72% 52%;
+    /* Sky — secondary accent, used sparingly */
+    --ochre: 199 90% 60%;
+    --line: 30 8% 20%;
+    --line-soft: 30 8% 16%;
+
+    --background: var(--ink);
+    --foreground: var(--bone);
+    --card: var(--ink-2);
+    --card-foreground: var(--bone);
+    --popover: var(--ink-2);
+    --popover-foreground: var(--bone);
+    --primary: var(--ember);
+    --primary-foreground: var(--ink);
+    --secondary: var(--ink-3);
+    --secondary-foreground: var(--bone);
+    --muted: var(--ink-3);
+    --muted-foreground: var(--bone-mute);
+    --accent: var(--ember);
+    --accent-foreground: var(--ink);
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--ember);
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: hsl(var(--ember));
+    color: hsl(var(--ink));
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Fraunces", Georgia, serif;
+  }
+  .font-mono2 {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-6 md:px-10;
+  }
+  .eyebrow {
+    @apply font-mono2 text-[11px] uppercase tracking-[0.28em] text-muted-foreground;
+  }
+  .rule {
+    @apply border-t border-border;
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+}
+
+/* Print résumé */
+@media print {
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    color: #111 !important;
+  }
+  .print-page * {
+    color: #111 !important;
+    border-color: #ccc !important;
+  }
+}
