@@ -1,12 +1,17 @@
 // Decodes base64 asset files (assets-b64/) back into public/ before build.
-// Binary files are stored as base64 text so the whole site lives in git.
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "node:fs";
+// If assets-b64/ is missing, the build continues without images.
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url)) + "/..";
 const src = join(root, "assets-b64");
 const dest = join(root, "public");
+
+if (!existsSync(src)) {
+  console.warn("assets-b64/ not found — building without image assets.");
+  process.exit(0);
+}
 
 for (const file of readdirSync(src)) {
   if (!file.endsWith(".b64")) continue;
