@@ -57,24 +57,8 @@ export default function CaseStudy() {
           )}
         </Reveal>
         <Reveal delay={0.15} className="mt-12">
-          <ProjectMedia src={project.heroImage} alt={`${project.title} — hero`} ratio="aspect-[21/9]" />
+          <ProjectMedia src={project.heroImage} alt={`${project.title} — hero`} ratio={project.heroImage?.endsWith(".png") ? "aspect-[21/9]" : "aspect-[21/9]"} />
         </Reveal>
-        {project.wordmark && (
-          <Reveal delay={0.2} className="mt-6">
-            <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-ink-2 px-8 py-14">
-              <p className="font-display text-4xl font-light uppercase tracking-[0.5em] md:text-5xl" style={{ textIndent: "0.5em" }}>
-                Makaia
-              </p>
-              <div className="flex items-center gap-5">
-                <span className="h-px w-10 bg-muted-foreground" aria-hidden />
-                <p className="font-mono2 text-xs uppercase tracking-[0.45em] text-muted-foreground" style={{ textIndent: "0.45em" }}>
-                  Sportswear
-                </p>
-                <span className="h-px w-10 bg-muted-foreground" aria-hidden />
-              </div>
-            </div>
-          </Reveal>
-        )}
       </header>
 
       <div className="container-x mt-20 grid gap-16 lg:grid-cols-[1fr_2fr]">
