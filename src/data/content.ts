@@ -223,7 +223,6 @@ export const projects: Project[] = [
     deliverables: ["Brand identity", "Logo design", "Jersey concepts", "Apparel mockups", "Marketing materials", "Sportswear branding"],
     featured: true,
     heroImage: "/assets/makaia-logo-bone.png",
-    wordmark: "Makaia Sportswear",
     comingSoonGallery: true,
     links: [{ label: "makaiasportswear.com", url: "https://makaiasportswear.com" }],
   },
