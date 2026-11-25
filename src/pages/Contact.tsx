@@ -11,7 +11,13 @@ interface FormState {
   message: string;
 }
 
-const initial: FormState = { name: "", email: "", organization: "", reason: "", message: "" };
+const initial: FormState = {
+  name: "",
+  email: "",
+  organization: "",
+  reason: "",
+  message: "",
+};
 
 // Delivers submissions straight to Sam's inbox via FormSubmit.
 const ENDPOINT = `https://formsubmit.co/ajax/${person.email}`;
@@ -19,7 +25,9 @@ const ENDPOINT = `https://formsubmit.co/ajax/${person.email}`;
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initial);
   const [errors, setErrors] = useState<Partial<FormState>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
   const set = (k: keyof FormState) => (e: { target: { value: string } }) => {
     setForm({ ...form, [k]: e.target.value });
@@ -29,10 +37,14 @@ export default function Contact() {
   const validate = (): boolean => {
     const next: Partial<FormState> = {};
     if (form.name.trim().length < 2) next.name = "Enter your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = "Enter a valid email address.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      next.email = "Enter a valid email address.";
     if (!form.reason) next.reason = "Select a reason.";
-    if (form.message.trim().length < 10) next.message = "Write a short message (10 characters or more).";
+    if (form.message.trim().length < 10)
+      next.message = "Write a short message (10 characters or more).";
     setErrors(next);
+    const first = Object.keys(next)[0];
+    if (first) document.getElementById(first)?.focus();
     return Object.keys(next).length === 0;
   };
 
@@ -43,7 +55,10 @@ export default function Contact() {
     try {
       const res = await fetch(ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           _subject: `Portfolio contact: ${form.reason} — ${form.name}`,
           _replyto: form.email,
@@ -69,7 +84,8 @@ export default function Contact() {
 
   const field =
     "w-full rounded-md border border-border bg-ink-2 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-ember focus:outline-none focus:ring-1 focus:ring-ember";
-  const label = "mb-2 block font-mono2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground";
+  const label =
+    "mb-2 block font-mono2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground";
   const err = "mt-1.5 text-xs text-ember";
 
   return (
@@ -81,13 +97,23 @@ export default function Contact() {
             Let's start a conversation<span className="text-ember">.</span>
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Do you have a job opportunity, a design project, or a team that needs jerseys? Send me a message.
-            It goes straight to my inbox, and I reply personally.
+            Have a business challenge, a creative project, or a collaboration in
+            mind? I would like to hear about it. For custom team apparel, visit
+            Makaia Sportswear.
           </p>
+          <a
+            className="mt-6 inline-block text-ember underline"
+            href="https://makaiasportswear.com"
+          >
+            Visit Makaia Sportswear
+          </a>
           <div className="mt-10 space-y-4">
             <div>
               <p className={label}>Email</p>
-              <a href={`mailto:${person.email}`} className="text-lg transition-colors hover:text-ember">
+              <a
+                href={`mailto:${person.email}`}
+                className="text-lg transition-colors hover:text-ember"
+              >
                 {person.email}
               </a>
             </div>
@@ -119,9 +145,12 @@ export default function Contact() {
             <div className="rounded-lg border border-ember/40 bg-ink-2 p-10 text-center">
               <p className="font-display text-3xl">Message sent.</p>
               <p className="mt-4 text-muted-foreground">
-                Thanks for reaching out. Your message is in my inbox — I will get back to you soon.
-                You can also email me directly at{" "}
-                <a href={`mailto:${person.email}`} className="text-ember underline">
+                Thanks for reaching out. Your message has been submitted — I
+                will get back to you soon. You can also email me directly at{" "}
+                <a
+                  href={`mailto:${person.email}`}
+                  className="text-ember underline"
+                >
                   {person.email}
                 </a>
                 .
@@ -134,21 +163,51 @@ export default function Contact() {
               </button>
             </div>
           ) : (
-            <form onSubmit={submit} noValidate className="space-y-6 rounded-lg border border-border bg-ink-2 p-8 md:p-10">
+            <form
+              aria-label="Contact Sam"
+              onSubmit={submit}
+              noValidate
+              className="space-y-6 rounded-lg border border-border bg-ink-2 p-8 md:p-10"
+            >
               <div className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className={label}>
                     Name *
                   </label>
-                  <input id="name" className={field} value={form.name} onChange={set("name")} placeholder="Your name" />
-                  {errors.name && <p className={err}>{errors.name}</p>}
+                  <input
+                    id="name"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "name-error" : undefined}
+                    className={field}
+                    value={form.name}
+                    onChange={set("name")}
+                    placeholder="Your name"
+                  />
+                  {errors.name && (
+                    <p id="name-error" role="alert" className={err}>
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className={label}>
                     Email *
                   </label>
-                  <input id="email" type="email" className={field} value={form.email} onChange={set("email")} placeholder="you@example.com" />
-                  {errors.email && <p className={err}>{errors.email}</p>}
+                  <input
+                    id="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "email-error" : undefined}
+                    type="email"
+                    className={field}
+                    value={form.email}
+                    onChange={set("email")}
+                    placeholder="you@example.com"
+                  />
+                  {errors.email && (
+                    <p id="email-error" role="alert" className={err}>
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="grid gap-6 sm:grid-cols-2">
@@ -156,13 +215,28 @@ export default function Contact() {
                   <label htmlFor="organization" className={label}>
                     Organization
                   </label>
-                  <input id="organization" className={field} value={form.organization} onChange={set("organization")} placeholder="Company, school, club…" />
+                  <input
+                    id="organization"
+                    className={field}
+                    value={form.organization}
+                    onChange={set("organization")}
+                    placeholder="Company, school, club…"
+                  />
                 </div>
                 <div>
                   <label htmlFor="reason" className={label}>
                     Reason for contacting *
                   </label>
-                  <select id="reason" className={field} value={form.reason} onChange={set("reason")}>
+                  <select
+                    id="reason"
+                    aria-invalid={Boolean(errors.reason)}
+                    aria-describedby={
+                      errors.reason ? "reason-error" : undefined
+                    }
+                    className={field}
+                    value={form.reason}
+                    onChange={set("reason")}
+                  >
                     <option value="">Select…</option>
                     {contactReasons.map((r) => (
                       <option key={r} value={r}>
@@ -170,20 +244,45 @@ export default function Contact() {
                       </option>
                     ))}
                   </select>
-                  {errors.reason && <p className={err}>{errors.reason}</p>}
+                  {errors.reason && (
+                    <p id="reason-error" role="alert" className={err}>
+                      {errors.reason}
+                    </p>
+                  )}
                 </div>
               </div>
               <div>
                 <label htmlFor="message" className={label}>
                   Message *
                 </label>
-                <textarea id="message" rows={6} className={field} value={form.message} onChange={set("message")} placeholder="Tell me about the opportunity or project…" />
-                {errors.message && <p className={err}>{errors.message}</p>}
+                <textarea
+                  id="message"
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={
+                    errors.message ? "message-error" : undefined
+                  }
+                  rows={6}
+                  className={field}
+                  value={form.message}
+                  onChange={set("message")}
+                  placeholder="Tell me about the opportunity or project…"
+                />
+                {errors.message && (
+                  <p id="message-error" role="alert" className={err}>
+                    {errors.message}
+                  </p>
+                )}
               </div>
               {status === "error" && (
-                <p className="rounded-md border border-ember/40 bg-ink-3 px-4 py-3 text-sm text-muted-foreground">
+                <p
+                  role="alert"
+                  className="rounded-md border border-ember/40 bg-ink-3 px-4 py-3 text-sm text-muted-foreground"
+                >
                   The message could not be sent. Please email me directly at{" "}
-                  <a href={`mailto:${person.email}`} className="text-ember underline">
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="text-ember underline"
+                  >
                     {person.email}
                   </a>
                   .

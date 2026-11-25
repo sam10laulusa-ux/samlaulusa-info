@@ -6,7 +6,7 @@ export function Reveal({
   children,
   delay = 0,
   className,
-  y = 28,
+  y: _y = 28,
 }: {
   children: ReactNode;
   delay?: number;
@@ -17,20 +17,23 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: reduce ? 0 : 0.7,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
       {children}
     </motion.div>
   );
 }
 
-export function Eyebrow({ children, index }: { children: ReactNode; index?: string }) {
+export function Eyebrow({ children }: { children: ReactNode; index?: string }) {
   return (
     <p className="eyebrow flex items-center gap-3">
-      {index && <span className="text-ember">{index}</span>}
       <span className="h-px w-8 bg-ember/60" aria-hidden />
       {children}
     </p>
@@ -54,29 +57,55 @@ export function PlaceholderImage({
     >
       <div className="absolute inset-0 bg-[radial-gradient(120%_100%_at_20%_0%,hsl(var(--ember)/0.08),transparent_60%)]" />
       <div className="relative px-6 text-center">
-        <p className="font-mono2 text-[10px] uppercase tracking-[0.3em] text-ember">Coming soon</p>
-        <p className="mt-2 font-display text-lg text-muted-foreground">{label}</p>
+        <p className="font-mono2 text-[10px] uppercase tracking-[0.3em] text-ember">
+          Coming soon
+        </p>
+        <p className="mt-2 font-display text-lg text-muted-foreground">
+          {label}
+        </p>
       </div>
     </div>
   );
 }
 
-export function ProjectThumb({ image, title, ratio = "aspect-[16/10]" }: { image?: string; title: string; ratio?: string }) {
+export function ProjectThumb({
+  image,
+  title,
+  ratio = "aspect-[16/10]",
+}: {
+  image?: string;
+  title: string;
+  ratio?: string;
+}) {
   if (!image) return <PlaceholderImage label={title} ratio={ratio} />;
   const isLogo = image.endsWith(".png");
   return (
-    <div className={`flex ${ratio} w-full items-center justify-center overflow-hidden rounded-lg border border-border ${isLogo ? "bg-ink-2 p-10" : ""}`}>
+    <div
+      className={`flex ${ratio} w-full items-center justify-center overflow-hidden rounded-lg border border-border ${isLogo ? "bg-ink-2 p-10" : ""}`}
+    >
       <img
         src={image}
         alt={title}
-        className={isLogo ? "max-h-full max-w-full object-contain" : "h-full w-full object-cover"}
+        className={
+          isLogo
+            ? "max-h-full max-w-full object-contain"
+            : "h-full w-full object-cover"
+        }
         loading="lazy"
       />
     </div>
   );
 }
 
-export function ArrowLink({ to, children, dark = false }: { to: string; children: ReactNode; dark?: boolean }) {
+export function ArrowLink({
+  to,
+  children,
+  dark = false,
+}: {
+  to: string;
+  children: ReactNode;
+  dark?: boolean;
+}) {
   return (
     <Link
       to={to}
@@ -85,9 +114,6 @@ export function ArrowLink({ to, children, dark = false }: { to: string; children
       }`}
     >
       <span className="border-b border-current pb-0.5">{children}</span>
-      <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-        →
-      </span>
     </Link>
   );
 }

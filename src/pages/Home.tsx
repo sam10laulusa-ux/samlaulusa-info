@@ -1,215 +1,190 @@
 import { Link } from "react-router";
-import { motion, useReducedMotion } from "framer-motion";
-import { CTAButton, Eyebrow, ProjectThumb, Reveal, Tag, ArrowLink } from "@/components/ui-primitives";
-import { person, projects, ventures } from "@/data/content";
-
-const pillars = [
-  {
-    n: "01",
-    title: "Communications & Leadership",
-    body: "I manage HOA communities, run board meetings, and coordinate vendors and projects. Clear communication keeps everything moving.",
-  },
-  {
-    n: "02",
-    title: "Graphic Design & Branding",
-    body: "Logos, brand systems, layouts, and apparel. I design in Illustrator, Photoshop, and Canva for leagues, brands, and my own companies.",
-  },
-  {
-    n: "03",
-    title: "Sports Marketing",
-    body: "I lead marketing and design for Utah Rugby League. Branding, social media, sponsor materials, events, and recruitment.",
-  },
-  {
-    n: "04",
-    title: "Entrepreneurship & Product",
-    body: "I founded Makaia Sportswear and I am building Sina HQ. I take ideas from concept to brand, product, and sales.",
-  },
-];
-
-function Hero() {
-  const reduce = useReducedMotion();
-  const anim = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 30 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
-        };
-  return (
-    <section className="container-x grid gap-12 pb-20 pt-32 md:pt-40 lg:grid-cols-[1.35fr_1fr] lg:items-end">
-      <div>
-        <motion.p {...anim(0)} className="eyebrow">
-          {person.location} · Portfolio
-        </motion.p>
-        <motion.h1 {...anim(0.08)} className="mt-6 font-display text-5xl font-light leading-[1.05] tracking-tight text-balance md:text-7xl">
-          I build software, create brands, and solve{" "}
-          <em className="not-italic text-ember">real-world problems</em>.
-        </motion.h1>
-        <motion.p {...anim(0.16)} className="mt-6 font-mono2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          {person.roles.join("  ·  ")}
-        </motion.p>
-        <motion.p {...anim(0.22)} className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          I'm Sam Laulusa. I manage HOA communities in Utah. I design brands and run marketing for Utah Rugby League.
-          I also founded Makaia Sportswear, a custom apparel company.
-        </motion.p>
-        <motion.div {...anim(0.3)} className="mt-10 flex flex-wrap gap-4">
-          <CTAButton to="/portfolio">View My Work</CTAButton>
-          <CTAButton to="/resume" variant="ghost">
-            View Résumé
-          </CTAButton>
-          <CTAButton to="/contact" variant="ghost">
-            Contact Me
-          </CTAButton>
-        </motion.div>
-      </div>
-      <motion.div {...anim(0.25)}>
-        <div className="grain relative overflow-hidden rounded-lg border border-border">
-          <img
-            src="/assets/portrait.jpg"
-            alt="Portrait of Sam Laulusa"
-            className="aspect-[3/4] w-full object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,hsl(var(--ink)/0.25),transparent_40%)]" />
-        </div>
-      </motion.div>
-    </section>
-  );
-}
-
-function Pillars() {
-  return (
-    <section className="rule">
-      <div className="container-x py-20">
-        <Reveal>
-          <Eyebrow index="01">What I do</Eyebrow>
-          <h2 className="mt-4 max-w-2xl font-display text-3xl font-light md:text-4xl">
-            Areas of expertise.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-border bg-border md:grid-cols-2">
-          {pillars.map((p, i) => (
-            <Reveal key={p.n} delay={i * 0.06} className="group bg-ink-2 p-8 transition-colors duration-300 hover:bg-ink-3 md:p-10">
-              <p className="font-mono2 text-xs text-ember">{p.n}</p>
-              <h3 className="mt-4 font-display text-2xl">{p.title}</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{p.body}</p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Featured() {
-  const featured = projects.filter((p) => p.featured);
-  return (
-    <section className="rule">
-      <div className="container-x py-20">
-        <Reveal className="flex items-end justify-between gap-6">
-          <div>
-            <Eyebrow index="02">Featured work</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-light md:text-4xl">Selected projects</h2>
-          </div>
-          <ArrowLink to="/portfolio">Full portfolio</ArrowLink>
-        </Reveal>
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          {featured.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 2) * 0.08}>
-              <Link to={`/portfolio/${p.slug}`} className="group block">
-                <div className="overflow-hidden rounded-lg">
-                  <div className="transition-transform duration-500 group-hover:scale-[1.02]">
-                    <ProjectThumb image={p.heroImage} title={p.title} />
-                  </div>
-                </div>
-                <div className="mt-5 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-display text-2xl transition-colors group-hover:text-ember">{p.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{p.role}</p>
-                  </div>
-                  {p.status && (
-                    <span className="mt-1 shrink-0 rounded-full border border-ember/40 px-3 py-1 font-mono2 text-[10px] uppercase tracking-[0.16em] text-ember">
-                      {p.status}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.category.map((c) => (
-                    <Tag key={c}>{c}</Tag>
-                  ))}
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function VentureStrip() {
-  return (
-    <section className="rule bg-ink-2">
-      <div className="container-x py-20">
-        <Reveal className="flex items-end justify-between gap-6">
-          <div>
-            <Eyebrow index="03">Ventures</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl font-light md:text-4xl">What I'm building</h2>
-          </div>
-          <ArrowLink to="/ventures">All ventures</ArrowLink>
-        </Reveal>
-        <div className="mt-12 divide-y divide-border border-y border-border">
-          {ventures.map((v, i) => (
-            <Reveal key={v.name} delay={i * 0.06}>
-              <div className="group flex flex-col gap-3 py-8 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-baseline gap-5">
-                  <span className="font-mono2 text-xs text-ember">0{i + 1}</span>
-                  <h3 className="font-display text-2xl md:text-3xl">{v.name}</h3>
-                </div>
-                <div className="flex items-center gap-6">
-                  <p className="max-w-md text-sm text-muted-foreground">{v.tags.join(" · ")}</p>
-                  <span className="font-mono2 text-[10px] uppercase tracking-[0.16em] text-ochre">{v.status}</span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ClosingCTA() {
-  return (
-    <section className="rule">
-      <div className="container-x py-24 text-center">
-        <Reveal>
-          <p className="eyebrow justify-center">Get in touch</p>
-          <h2 className="mx-auto mt-6 max-w-2xl font-display text-4xl font-light leading-tight md:text-5xl">
-            Have a project or a role in mind? <span className="text-ember">Let's talk.</span>
-          </h2>
-          <div className="mt-10 flex justify-center gap-4">
-            <CTAButton to="/contact">Contact Me</CTAButton>
-            <CTAButton to="/resume" variant="ghost">
-              View Résumé
-            </CTAButton>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
+import { CTAButton } from "@/components/ui-primitives";
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Pillars />
-      <Featured />
-      <VentureStrip />
-      <ClosingCTA />
+      <section className="home-hero container-x">
+        <div className="hero-topline">
+          <p>Sam Laulusa</p>
+          <p>Independent thinking. Practical work.</p>
+        </div>
+        <div className="hero-grid">
+          <div>
+            <p className="eyebrow">
+              Entrepreneur, Creative & AI Solutions Builder
+            </p>
+            <h1>
+              Building businesses.
+              <br />
+              Creating experiences.
+              <br />
+              <span>Solving problems.</span>
+            </h1>
+            <p className="hero-intro">
+              I combine entrepreneurship, design and artificial intelligence to
+              create practical solutions for real-world challenges.
+            </p>
+            <div className="hero-actions">
+              <CTAButton to="/portfolio">Explore my work</CTAButton>
+              <Link to="/ai-technology">View AI projects</Link>
+              <Link to="/about">About me</Link>
+            </div>
+          </div>
+          <figure className="hero-portrait">
+            <img
+              src="/assets/portrait.jpg"
+              alt="Sam Laulusa"
+              fetchPriority="high"
+            />
+            <figcaption>
+              Based in Stafford, Virginia
+              <br />
+              <span>Founder of Makaia Sportswear</span>
+            </figcaption>
+          </figure>
+        </div>
+        <div className="hero-bottom">
+          <span>Business perspective. Creative instinct.</span>
+          <span>Design · Technology · Communication</span>
+        </div>
+      </section>
+      <section className="container-x section-space">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Selected work</p>
+            <h2>Ideas put to work.</h2>
+          </div>
+          <Link className="text-link" to="/portfolio">
+            Explore the portfolio
+          </Link>
+        </div>
+        <div className="featured-grid">
+          <Link
+            to="/ai-technology/makaia-crm"
+            className="feature-card feature-crm"
+          >
+            <div className="project-art">
+              <p className="eyebrow">Makaia / Business tools</p>
+              <h3>
+                A clearer view
+                <br />
+                of the next step.
+              </h3>
+              <div className="workflow-labels">
+                <span>Organize</span>
+                <span>Track</span>
+                <span>Follow through</span>
+              </div>
+              <p className="art-caption">CRM · AI-assisted development</p>
+            </div>
+            <div className="card-caption">
+              <h3>Makaia CRM</h3>
+              <p>A private tool built around real outreach work.</p>
+              <span>AI & Technology</span>
+            </div>
+          </Link>
+          <Link to="/business" className="feature-card">
+            <div className="brand-art">
+              <img
+                src="/assets/makaia-logo-bone.png"
+                alt="Makaia Sportswear brand identity"
+                loading="lazy"
+              />
+            </div>
+            <div className="card-caption">
+              <h3>Makaia Sportswear</h3>
+              <p>Building a business from identity to customer experience.</p>
+              <span>Entrepreneurship · Creative direction</span>
+            </div>
+          </Link>
+        </div>
+        <div className="creative-strip">
+          <Link to="/portfolio/utah-rugby-league">
+            <img
+              src="/assets/url-logo.png"
+              alt="Utah Rugby League identity"
+              loading="lazy"
+            />
+            <div>
+              <span>Branding & sports marketing</span>
+              <h3>An identity for the game.</h3>
+            </div>
+          </Link>
+          <Link to="/photography">
+            <img
+              src="/photos/DSC03951-960.webp"
+              alt="Mother and baby in golden evening light"
+              loading="lazy"
+            />
+            <div>
+              <span>Original photography</span>
+              <h3>The moments in between.</h3>
+            </div>
+          </Link>
+        </div>
+      </section>
+      <section className="practical-section">
+        <div className="container-x practical-grid section-space">
+          <div>
+            <p className="eyebrow">Business first. Technology with purpose.</p>
+            <h2>
+              Making AI practical
+              <br />
+              for small businesses.
+            </h2>
+          </div>
+          <div>
+            <p>
+              As a small business owner, I understand the challenge of balancing
+              marketing, customer relationships, operations and growth.
+            </p>
+            <p>
+              I use AI to build useful tools, support repetitive work and make
+              technology more accessible. The aim is a solution a business owner
+              can understand, review and maintain.
+            </p>
+            <Link className="text-link" to="/ai-technology">
+              See my approach
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section className="container-x section-space">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">A multidisciplinary perspective</p>
+            <h2>Built from experience.</h2>
+          </div>
+          <Link className="text-link" to="/about">
+            More about me
+          </Link>
+        </div>
+        <div className="capabilities">
+          {[
+            [
+              "Entrepreneurship",
+              "Product development, supplier coordination, customer relationships and the daily work of growing Makaia.",
+            ],
+            [
+              "Applied AI",
+              "Business tools, AI-assisted development, research and marketing workflows with human review.",
+            ],
+            [
+              "Design & storytelling",
+              "Brand identities, sportswear, visual communication and original photography.",
+            ],
+            [
+              "Communication & leadership",
+              "A background in community operations, legal administration and sports marketing.",
+            ],
+          ].map(([h, p]) => (
+            <article key={h}>
+              <h3>{h}</h3>
+              <p>{p}</p>
+            </article>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

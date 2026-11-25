@@ -26,3 +26,6 @@ dist-ssr
 # generated at build from assets-b64/
 public/assets/
 public/sam-laulusa-resume.pdf
+
+*.tsbuildinfo
+qa/

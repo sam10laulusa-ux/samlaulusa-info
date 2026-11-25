@@ -1,24 +1,31 @@
-# Sam Laulusa — Portfolio (samlaulusa.info)
+# Sam Laulusa — samlaulusa.info
 
-Personal portfolio site. React + TypeScript + Vite + Tailwind CSS + Framer Motion.
+React, TypeScript, Vite and Tailwind portfolio, deployed to the existing Cloudflare Worker `samlaulusa-info`.
 
-## Develop
+## Development
 
-```bash
-npm install
-npm run build   # restores binary assets from assets-b64/ into public/, then builds
-npm run preview
+```sh
+npm ci
+npm run dev
+npm run build
+npm run typecheck
+npm run lint
+node scripts/validate-build.mjs
 ```
 
-## Deploy to Cloudflare (one click)
+The build restores original encoded assets, builds the application and prerenders 18 routes. Responsive new photographs are committed in `public/photos`.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/sam10laulusa-ux/samlaulusa-portfolio)
+## Content
 
-Cloudflare Workers Builds runs `npm run build` and deploys `dist/` as static assets
-(`wrangler.json` is already configured, including SPA fallback).
+- Biography, experience and original projects: `src/data/content.ts`
+- AI case studies: `src/data/ai.ts`
+- Featured photographs, order, captions and alternative text: `src/data/photography.ts`
+- Search metadata and prerendered routes: `src/data/seo.ts`
 
-## Notes
+See [HANDOFF.md](HANDOFF.md) for the content verification checklist, photo instructions, test coverage and rollback details.
 
-- Images and the résumé PDF live in `assets-b64/` as base64 text and are decoded
-  into `public/` by `scripts/restore-assets.mjs` during every build.
-- Site content is edited in `src/data/content.ts`.
+## Deployment
+
+Production source: `sam10laulusa-ux/samlaulusa-info` (not the similarly named portfolio repository). The existing Cloudflare Workers Builds trigger runs `npm run build` followed by `npx wrangler deploy`. Keep `wrangler.json` pointed at the existing Worker and `dist` assets.
+
+The existing non-main trigger also deploys; avoid pushing unreviewed branches or checkpoint branches. Use the `pre-revamp-2026-11-24` tag for the original source checkpoint. The older résumé and retired venture assets remain in Git but are not published.

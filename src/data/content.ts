@@ -6,10 +6,10 @@
 
 export const person = {
   name: "Sam Laulusa",
-  location: "Orem, Utah",
+  location: "Stafford, Virginia",
   email: "sam10laulusa@outlook.com",
-  roles: ["Communications Professional", "Designer", "Entrepreneur"],
-  tagline: "I build software, create brands, and solve real-world problems.",
+  roles: ["Entrepreneur", "Creative", "AI Solutions Builder"],
+  tagline: "Building businesses. Creating experiences. Solving problems.",
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/sam-laulusa" },
     { label: "Instagram", url: "https://www.instagram.com/samlaulusa/" },
@@ -18,16 +18,14 @@ export const person = {
 };
 
 export const shortBio =
-  "Sam Laulusa is a communications professional, graphic designer, and entrepreneur in Utah. He manages HOA communities with Community Solutions & Sales. He leads marketing and design for Utah Rugby League. He founded Makaia Sportswear, a custom team apparel company.";
-
+  "Sam Laulusa is an entrepreneur and creative professional based in Stafford, Virginia. He operates Makaia Sportswear and uses design, communication and AI-assisted development to solve practical business problems.";
 export const longBio = [
-  "I work in two worlds. By day, I manage HOA and condominium communities for Community Solutions & Sales, an Associa company. I prepare board packets and budgets. I run board meetings. I coordinate vendors and capital projects. I answer questions from homeowners.",
-  "Outside of work, I build brands. I sit on the board of Utah Rugby League, where I lead all marketing and design. I also founded Makaia Sportswear. It is a custom apparel company for schools, clubs, and teams. I design the products. I find the suppliers. I set the prices. I talk to the customers.",
-  "Before this, I worked as a paralegal. I also worked as an intern for Seminaries and Institutes of Religion. Those jobs taught me to write clearly, stay organized, and communicate well with many different people.",
-  "I am finishing a Bachelor of Applied Science in Communication at Ensign College. I also hold certificates in Communication and Social Media Marketing.",
-  "My goal in every project is simple. I take something — a community, a league, a brand, a product idea — and I make it clearer, stronger, and better than it was before.",
+  "I'm Sam Laulusa, an entrepreneur and creative professional in Stafford, Virginia. My primary focus is growing Makaia Sportswear, a custom apparel business for teams, schools and organizations.",
+  "Running a small business brings design, customer relationships, production and operations into the same day. I develop the brand and products, coordinate suppliers, and work with customers from the first conversation through production.",
+  "I use AI-assisted development to build practical tools for that work. My role is to understand the business problem, define what a useful solution needs to do, and guide, review and test the work with AI coding assistants. I bring a business and creative perspective rather than a traditional software engineering background.",
+  "My background includes communications, social media marketing, graphic design, legal administration and community association management. In my former community manager role, I coordinated vendors, prepared board communications and supported day-to-day operations.",
+  "My work with Utah Rugby League spans board leadership, branding, club identities and sports marketing. Photography is another way I pay attention: to people, to light and to the small moments that deserve to be kept.",
 ];
-
 export interface Experience {
   org: string;
   role: string;
@@ -43,16 +41,22 @@ export const experience: Experience[] = [
   {
     org: "Community Solutions & Sales (An Associa Company)",
     role: "Community Association Manager",
-    dates: "Dec 2025 – Present",
+    dates: "Past role · started Dec 2025",
     location: "Draper, UT",
     summary:
-      "I manage about 10 HOA and condominium communities. I am the main contact for board members, homeowners, vendors, and our internal team.",
+      "I managed HOA and condominium communities. I was the main contact for board members, homeowners, vendors, and our internal team.",
     responsibilities: [
-      "Prepare board packets, agendas, meeting minutes, budgets, financial summaries, and owner communications",
-      "Manage bids, contracts, maintenance, insurance, compliance, and capital projects from start to finish",
-      "Run board and annual meetings. Solve problems for owners. Keep records. Track violations, late payments, and follow-up items",
+      "Prepared board packets, agendas, meeting minutes, budgets, financial summaries, and owner communications",
+      "Managed bids, contracts, maintenance, insurance, compliance, and capital projects from start to finish",
+      "Ran board and annual meetings, resolved owner questions, maintained records and tracked follow-up items",
     ],
-    skills: ["Community Association Management", "Board Relations", "Vendor Coordination", "Budget Support", "Stakeholder Communication"],
+    skills: [
+      "Community Association Management",
+      "Board Relations",
+      "Vendor Coordination",
+      "Budget Support",
+      "Stakeholder Communication",
+    ],
     kind: "professional",
   },
   {
@@ -64,7 +68,12 @@ export const experience: Experience[] = [
     responsibilities: [
       "Did research, tracked cases, and shared information with attorneys, clients, and agencies",
     ],
-    skills: ["Professional Writing", "Research", "Records Management", "Deadline Compliance"],
+    skills: [
+      "Professional Writing",
+      "Research",
+      "Records Management",
+      "Deadline Compliance",
+    ],
     kind: "professional",
   },
   {
@@ -76,7 +85,12 @@ export const experience: Experience[] = [
     responsibilities: [
       "Worked with students, staff, and community members in a service-focused environment",
     ],
-    skills: ["Program Administration", "Event Coordination", "Communication Materials", "Outreach"],
+    skills: [
+      "Program Administration",
+      "Event Coordination",
+      "Communication Materials",
+      "Outreach",
+    ],
     kind: "professional",
   },
   {
@@ -88,7 +102,13 @@ export const experience: Experience[] = [
     responsibilities: [
       "I also help with player recruitment, sponsor outreach, and league growth",
     ],
-    skills: ["Brand Strategy", "Graphic Design", "Social Media Marketing", "Event Marketing", "Sponsorship Materials"],
+    skills: [
+      "Brand Strategy",
+      "Graphic Design",
+      "Social Media Marketing",
+      "Event Marketing",
+      "Sponsorship Materials",
+    ],
     kind: "leadership",
   },
   {
@@ -100,7 +120,13 @@ export const experience: Experience[] = [
     responsibilities: [
       "I find manufacturers, negotiate prices and order minimums, manage production, and talk to customers every day",
     ],
-    skills: ["Entrepreneurship", "Product Development", "Supplier Coordination", "Pricing", "Sales"],
+    skills: [
+      "Entrepreneurship",
+      "Product Development",
+      "Supplier Coordination",
+      "Pricing",
+      "Sales",
+    ],
     kind: "leadership",
   },
   {
@@ -116,29 +142,56 @@ export const experience: Experience[] = [
 ];
 
 export const education = {
-  degree: "Bachelor of Applied Science in Communication",
+  degree: "Communications studies",
   school: "Ensign College, Salt Lake City, UT",
-  expected: "Expected Aug 2026",
-  certificates: ["Communication", "Social Media Marketing"],
-  technical: ["Microsoft Excel (certified)"],
+  expected: "",
+  certificates: [] as string[],
+  technical: ["Microsoft Excel"],
 };
 
 export const skillGroups = [
   {
     title: "Leadership & Management",
-    skills: ["Community Association Management", "Project Management", "Vendor Coordination", "Board Relations", "Stakeholder Communication", "Meeting Facilitation"],
+    skills: [
+      "Community Association Management",
+      "Project Management",
+      "Vendor Coordination",
+      "Board Relations",
+      "Stakeholder Communication",
+      "Meeting Facilitation",
+    ],
   },
   {
     title: "Communications & Marketing",
-    skills: ["Public Relations", "Brand Strategy", "Social Media Marketing", "Professional Writing", "Campaign Development"],
+    skills: [
+      "Public Relations",
+      "Brand Strategy",
+      "Social Media Marketing",
+      "Professional Writing",
+      "Campaign Development",
+    ],
   },
   {
     title: "Creative",
-    skills: ["Graphic Design", "Branding", "Logo Design", "Apparel Design", "Photography", "Layout Design"],
+    skills: [
+      "Graphic Design",
+      "Branding",
+      "Logo Design",
+      "Apparel Design",
+      "Photography",
+      "Layout Design",
+    ],
   },
   {
     title: "Software",
-    skills: ["Adobe Illustrator", "Adobe Photoshop", "Adobe Lightroom", "Canva", "Microsoft 365 (Excel certified)", "Social Media Analytics"],
+    skills: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Adobe Lightroom",
+      "Canva",
+      "Microsoft 365",
+      "Social Media Analytics",
+    ],
   },
 ];
 
@@ -220,11 +273,20 @@ export const projects: Project[] = [
     ],
     solution:
       "A sportswear brand with a strong identity and a personal, design-led customer experience. The client sees the design before we make the product.",
-    deliverables: ["Brand identity", "Logo design", "Jersey concepts", "Apparel mockups", "Marketing materials", "Sportswear branding"],
+    deliverables: [
+      "Brand identity",
+      "Logo design",
+      "Jersey concepts",
+      "Apparel mockups",
+      "Marketing materials",
+      "Sportswear branding",
+    ],
     featured: true,
     heroImage: "/assets/makaia-logo-bone.png",
-    comingSoonGallery: true,
-    links: [{ label: "makaiasportswear.com", url: "https://makaiasportswear.com" }],
+    comingSoonGallery: false,
+    links: [
+      { label: "makaiasportswear.com", url: "https://makaiasportswear.com" },
+    ],
   },
   {
     slug: "utah-rugby-league",
@@ -246,41 +308,30 @@ export const projects: Project[] = [
     ],
     solution:
       "One brand system and a steady stream of content. It covers social media, events, sponsors, and recruitment. The league now looks as professional as it plays.",
-    deliverables: ["Brand identity", "League & club logo design", "Social media graphics", "Event marketing", "Sponsor materials", "Recruitment campaigns", "Photography", "Promotional materials"],
+    deliverables: [
+      "Brand identity",
+      "League & club logo design",
+      "Social media graphics",
+      "Event marketing",
+      "Sponsor materials",
+      "Recruitment campaigns",
+      "Photography",
+      "Promotional materials",
+    ],
     featured: true,
     heroImage: "/assets/url-logo.png",
-    links: [{ label: "@utahrugbyleague on Instagram", url: "https://www.instagram.com/utahrugbyleague/" }],
+    links: [
+      {
+        label: "@utahrugbyleague on Instagram",
+        url: "https://www.instagram.com/utahrugbyleague/",
+      },
+    ],
     logoShowcase: [
       { src: "/assets/url-logo.png", name: "Utah Rugby League" },
       { src: "/assets/raiders-logo.png", name: "Lehi Raiders" },
       { src: "/assets/seagulls-logo.png", name: "Riverton Seagulls" },
       { src: "/assets/broncos-logo.png", name: "Broncos" },
     ],
-  },
-  {
-    slug: "sina-hq",
-    title: "Sina HQ",
-    category: ["Product Design"],
-    role: "Founder / Product Lead",
-    status: "In development",
-    summary:
-      "A software tool for community managers. It organizes email, tasks, documents, and vendors in one place, with AI help. An early version is live at sinahq.io.",
-    overview:
-      "Sina HQ is a software product I am building. The idea came from my daily work in community management. It gives managers one organized place for work that now lives in inboxes, spreadsheets, and memory. An early version is live at sinahq.io.",
-    challenge:
-      "Community managers handle hundreds of owner emails, vendor threads, tasks, and records across many communities. The current tools were not made for this work.",
-    process: [
-      "I mapped the real daily workflows of community management from my own experience",
-      "I defined the product strategy and the core features",
-      "I designed the brand and the early user interface",
-    ],
-    solution:
-      "A focused platform for email organization, task management, knowledge management, vendor management, and AI assistance. It is designed by someone who does this work every day.",
-    deliverables: ["Product strategy", "Brand identity", "UI design", "Product development"],
-    featured: true,
-    heroImage: "/assets/sinahq-login.jpg",
-    links: [{ label: "sinahq.io", url: "https://sinahq.io/" }],
-    note: "Sina HQ is in early development. The screenshot shows the live early version at sinahq.io.",
   },
   {
     slug: "social-media-campaigns",
@@ -300,12 +351,23 @@ export const projects: Project[] = [
     ],
     solution:
       "Content systems that keep both feeds active and on-brand. You can see the work live on Instagram.",
-    deliverables: ["Campaign graphics", "Content templates", "Feed management", "Analytics review"],
+    deliverables: [
+      "Campaign graphics",
+      "Content templates",
+      "Feed management",
+      "Analytics review",
+    ],
     featured: true,
     heroImage: "/assets/ig-dashboard.jpg",
     links: [
-      { label: "@utahrugbyleague on Instagram", url: "https://www.instagram.com/utahrugbyleague/" },
-      { label: "@lehiraiders on Instagram", url: "https://www.instagram.com/lehiraiders/" },
+      {
+        label: "@utahrugbyleague on Instagram",
+        url: "https://www.instagram.com/utahrugbyleague/",
+      },
+      {
+        label: "@lehiraiders on Instagram",
+        url: "https://www.instagram.com/lehiraiders/",
+      },
     ],
     gallery: ["/assets/ig-utahrugbyleague.jpg", "/assets/ig-lehiraiders.jpg"],
   },
@@ -318,8 +380,16 @@ export const projects: Project[] = [
       "Personal and event photography. It is a creative outlet and a growing portfolio. I shoot and edit in Lightroom.",
     overview:
       "Photography is a hobby and part of my creative toolkit. I shoot events and personal work. I edit in Adobe Lightroom. This page shows some of my recent photos.",
-    process: ["Shoot on location at events and sessions", "Select and edit the best shots in Adobe Lightroom", "Deliver galleries for personal and organizational use"],
-    deliverables: ["Event photography", "Personal photography", "Lightroom editing"],
+    process: [
+      "Shoot on location at events and sessions",
+      "Select and edit the best shots in Adobe Lightroom",
+      "Deliver galleries for personal and organizational use",
+    ],
+    deliverables: [
+      "Event photography",
+      "Personal photography",
+      "Lightroom editing",
+    ],
     featured: false,
     heroImage: "/assets/child-pond.jpg",
     gallery: photography.map((p) => p.src),
@@ -337,18 +407,6 @@ export const ventures = [
     tags: ["Apparel", "Branding", "E-commerce", "Product Development"],
     slug: "makaia-sportswear",
     url: "https://makaiasportswear.com" as string | null,
-    urlNote: null as string | null,
-  },
-  {
-    name: "Sina HQ",
-    role: "Founder / Product Lead",
-    dates: "In development",
-    status: "In development",
-    description:
-      "A software tool for community association and property management professionals. It focuses on email organization, task management, knowledge management, vendor management, and AI assistance. The idea comes from my own experience in the industry.",
-    tags: ["SaaS", "Product Strategy", "PropTech", "AI"],
-    slug: "sina-hq",
-    url: "https://sinahq.io/" as string | null,
     urlNote: null as string | null,
   },
 ];

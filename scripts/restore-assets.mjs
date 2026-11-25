@@ -2,7 +2,13 @@
 // Binary files are stored as base64 text so the whole site lives in git.
 // Large assets may be split into parts: name.b64.0, name.b64.1, ...
 // Scans both assets-b64/ and the repo root (web UI uploads land there).
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  readdirSync,
+  existsSync,
+} from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -39,6 +45,8 @@ for (const key of singles.keys()) {
 let count = 0;
 function restore(key, text) {
   const rel = key.replace(/\.b64$/, "").replaceAll("__", "/");
+  if (rel === "sam-laulusa-resume.pdf" || rel === "assets/sinahq-login.jpg")
+    return;
   const data = Buffer.from(text, "base64");
   const out = join(dest, rel);
   mkdirSync(dirname(out), { recursive: true });
@@ -49,7 +57,10 @@ function restore(key, text) {
 
 for (const [key, text] of singles) restore(key, text);
 for (const [key, parts] of multis) {
-  const joined = [...parts.keys()].sort((a, b) => a - b).map((i) => parts.get(i)).join("");
+  const joined = [...parts.keys()]
+    .sort((a, b) => a - b)
+    .map((i) => parts.get(i))
+    .join("");
   restore(key, joined);
 }
 
